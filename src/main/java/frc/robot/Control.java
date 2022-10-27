@@ -72,16 +72,12 @@ public class Control {
         controlRight(yLeft);
     }
 
-    public static void control() {
-        double yLeft = Controller.getRawAxis(1) * -1;
-        double xRight = Controller.getRawAxis(4) * -1;
-
+    public static void control(double yLeft, double xRight) {
         if (xRight <= -0.1 || xRight >= 0.1) {
             turn(xRight, yLeft);
         } 
-        else {
+        else if (yLeft <= -0.05 || yLeft >= -0.05){
             move(yLeft);
         }
-
     }
 }

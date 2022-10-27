@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import frc.robot.Control;
+import frc.robot.VisionControl;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -28,20 +29,20 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotInit() {
-    Control.Controller = new Joystick(1);
+    OI.Controller = new Joystick(1);
 
     //needs ids
     Control.DriveTrainLeft0 = new VictorSPX(1);
     Control.DriveTrainLeft1 = new VictorSPX(5);
 
-    Control.DriveTrainLeft1.setInverted(true);
-    Control.DriveTrainLeft0.setInverted(true);
+    Control.DriveTrainLeft1.setInverted(false);
+    Control.DriveTrainLeft0.setInverted(false);
 
     Control.DriveTrainRight0 = new VictorSPX(6);
     Control.DriveTrainRight1 = new VictorSPX(0);
 
-    Control.DriveTrainRight1.setInverted(false);
-    Control.DriveTrainRight0.setInverted(false);
+    Control.DriveTrainRight1.setInverted(true);
+    Control.DriveTrainRight0.setInverted(true);
 
 
   }
@@ -84,7 +85,7 @@ public class Robot extends TimedRobot {
   /** This function is called periodically during operator control. */
   @Override
   public void teleopPeriodic() {
-    Control.control();
+    OI.inputManager();
   }
   
   /** This function is called once when the robot is disabled. */
