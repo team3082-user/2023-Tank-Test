@@ -25,19 +25,22 @@ public class Control {
     }
 
     public static void turn(double xRight, double yLeft) {
+        //check for forward or backward
+        double yLeftModifier = 0;
+        if (yLeft > 0) {yLeftModifier = (1 - yLeft) * -1;}
+        else if (yLeft < 0) {yLeftModifier = (1 + yLeft);}
+        System.out.print(yLeftModifier);
+
+        //check for curved turn
+        boolean curve = false;
+        if (yLeft >= 0.05 || yLeft <= 0.05) {curve = true;}
+
         //turn right
         if (xRight > 0) {
-            //forward right
-            if (yLeft >= 0.05) {
-                if (xRight > 0) {xRight *= -1;}
-                controlRight(xRight * (0.5 - (yLeft / 2)));
-                controlLeft(xRight * (0.5 + (yLeft / 2)));
-            }
-            //backward right
-            else if (yLeft <= -0.05) {
-                if (xRight > 0) {xRight *= -1;}
-                controlRight(xRight * (0.5 + (yLeft / 2)) * -1);
-                controlLeft(xRight * (0.5 - (yLeft / 2)) * -1);
+            //right curve
+            if (curve) {
+                controlRight(xRight * yLeftModifier);
+                controlLeft(xRight);
             }
             //spin right
             else {
@@ -47,17 +50,10 @@ public class Control {
         }
         //turn left
         else if (xRight < 0) {
-            //forward left
-            if (yLeft >= 0.1) {
-                if (xRight > 0) {xRight *= -1;}
-                controlRight(xRight * (0.5 + (yLeft / 2)));
-                controlLeft(xRight * (0.5 - (yLeft / 2)));
-            }
-            //backward left
-            if (yLeft <= -0.1) {
-                if (xRight > 0) {xRight *= -1;}
-                controlRight(xRight * (0.5 - (yLeft / 2)) * -1);
-                controlLeft(xRight * (0.5 + (yLeft / 2)) * -1);
+            //left curve
+            if (curve) {
+                controlRight(-1 * xRight);
+                controlLeft(-1 * xRight * yLeftModifier);
             }
             //spin left
             else {
