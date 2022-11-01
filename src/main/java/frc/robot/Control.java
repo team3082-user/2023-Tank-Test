@@ -26,21 +26,23 @@ public class Control {
 
     public static void turn(double xRight, double yLeft) {
         //check for forward or backward
+        int direction = 1;
         double yLeftModifier = 0;
-        if (yLeft > 0) {yLeftModifier = (1 - yLeft) * -1;}
-        else if (yLeft < 0) {yLeftModifier = (1 + yLeft);}
+        if (yLeft > 0) {yLeftModifier = 1 - yLeft; direction = 1;}
+        else if (yLeft < 0) {yLeftModifier = 1 + yLeft; direction = -1;}
         System.out.print(yLeftModifier);
 
         //check for curved turn
         boolean curve = false;
         if (yLeft >= 0.05 || yLeft <= 0.05) {curve = true;}
+        else {curve = false;}
 
         //turn right
         if (xRight > 0) {
             //right curve
             if (curve) {
-                controlRight(xRight * yLeftModifier);
-                controlLeft(xRight);
+                controlRight(xRight * yLeftModifier * direction);
+                controlLeft(xRight * direction);
             }
             //spin right
             else {
@@ -52,8 +54,8 @@ public class Control {
         else if (xRight < 0) {
             //left curve
             if (curve) {
-                controlRight(-1 * xRight);
-                controlLeft(-1 * xRight * yLeftModifier);
+                controlRight(-1 * xRight * direction);
+                controlLeft(-1 * xRight * yLeftModifier * direction);
             }
             //spin left
             else {

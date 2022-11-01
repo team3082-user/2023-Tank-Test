@@ -32,17 +32,17 @@ public class Robot extends TimedRobot {
     OI.Controller = new Joystick(1);
 
     //needs ids
-    Control.DriveTrainLeft0 = new VictorSPX(1);
-    Control.DriveTrainLeft1 = new VictorSPX(5);
+    Control.DriveTrainLeft0 = new VictorSPX(6);
+    Control.DriveTrainLeft1 = new VictorSPX(0);
 
-    Control.DriveTrainLeft1.setInverted(false);
-    Control.DriveTrainLeft0.setInverted(false);
+    Control.DriveTrainLeft1.setInverted(true);
+    Control.DriveTrainLeft0.setInverted(true);
 
-    Control.DriveTrainRight0 = new VictorSPX(6);
-    Control.DriveTrainRight1 = new VictorSPX(0);
+    Control.DriveTrainRight0 = new VictorSPX(1);
+    Control.DriveTrainRight1 = new VictorSPX(5);
 
-    Control.DriveTrainRight1.setInverted(true);
-    Control.DriveTrainRight0.setInverted(true);
+    Control.DriveTrainRight1.setInverted(false);
+    Control.DriveTrainRight0.setInverted(false);
 
 
   }
